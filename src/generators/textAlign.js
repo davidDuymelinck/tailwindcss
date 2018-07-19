@@ -1,10 +1,15 @@
-import defineClasses from '../util/defineClasses'
+import _ from 'lodash'
+import defineClass from '../util/defineClass'
 
-export default function() {
-  return defineClasses({
-    'text-left': { 'text-align': 'left' },
-    'text-center': { 'text-align': 'center' },
-    'text-right': { 'text-align': 'right' },
-    'text-justify': { 'text-align': 'justify' },
+export default function({ modifyClassNames }) {
+  const prefix = _.has(modifyClassNames, 'textAlign.prefix') ? modifyClassNames.textAlign.prefix : 'text-'
+  const alignments = ['left', 'center', 'right', 'justify']
+
+  return _.map(alignments, (value) => {
+    let modifier = _.has(modifyClassNames, `textAlign.modifier.${value}`) ? modifyClassNames.textAlign.modifier[value] : value
+
+    return defineClass(`${prefix}${modifier}`, {
+      'text-align': value,
+    })
   })
 }

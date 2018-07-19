@@ -1,117 +1,163 @@
 import defineClasses from '../util/defineClasses'
+import _ from "lodash";
+import defineClass from "../util/defineClass";
 
-export default function() {
-  return defineClasses({
+export default function({ modifyClassNames }) {
+  const prefix = _.has(modifyClassNames, 'flexbox.prefix') ? modifyClassNames.flexbox.prefix : ''
+  const styles = {
     flex: {
-      display: 'flex',
+      class: 'flex',
+      style: { display: 'flex' },
     },
-    'inline-flex': {
-      display: 'inline-flex',
+    inlineFlex: {
+      class: 'inline-flex',
+      style: { display: 'inline-flex'},
     },
-    'flex-row': {
-      'flex-direction': 'row',
+    flexRow: {
+      class: 'flex-row',
+      style: {'flex-direction': 'row'},
     },
-    'flex-row-reverse': {
-      'flex-direction': 'row-reverse',
+    flexRowReverse: {
+      class: 'flex-row-reverse',
+      style: {'flex-direction': 'row-reverse'},
     },
-    'flex-col': {
-      'flex-direction': 'column',
+    flexCol: {
+      class: 'flex-col',
+      style: {'flex-direction': 'column'},
     },
-    'flex-col-reverse': {
-      'flex-direction': 'column-reverse',
+    flexColReverse: {
+      class: 'flex-col-reverse',
+      style: {'flex-direction': 'column-reverse'},
     },
-    'flex-wrap': {
-      'flex-wrap': 'wrap',
+    flexWrap: {
+      class: 'flex-wrap',
+      style: {'flex-wrap': 'wrap'},
     },
-    'flex-wrap-reverse': {
-      'flex-wrap': 'wrap-reverse',
+    flexWrapReverse: {
+      class: 'flex-wrap-reverse',
+      style: {'flex-wrap': 'wrap-reverse'},
     },
-    'flex-no-wrap': {
-      'flex-wrap': 'nowrap',
+    flexNoWrap: {
+      class: 'flex-no-wrap',
+      style: {'flex-wrap': 'nowrap'},
     },
-    'items-start': {
-      'align-items': 'flex-start',
+    itemsStart: {
+      class: 'items-start',
+      style: {'align-items': 'flex-start'},
     },
-    'items-end': {
-      'align-items': 'flex-end',
+    itemsEnd: {
+      class: 'items-end',
+      style: {'align-items': 'flex-end'},
     },
-    'items-center': {
-      'align-items': 'center',
+    itemsCenter: {
+      class: 'items-center',
+      style: {'align-items': 'center'},
     },
-    'items-baseline': {
-      'align-items': 'baseline',
+    itemsBaseline: {
+      class: 'items-baseline',
+      style: {'align-items': 'baseline'},
     },
-    'items-stretch': {
-      'align-items': 'stretch',
+    itemsStretch: {
+      class: 'items-stretch',
+      style: {'align-items': 'stretch'},
     },
-    'self-auto': {
-      'align-self': 'auto',
+    selfAuto: {
+      class: 'self-auto',
+      style: {'align-self': 'auto'},
     },
-    'self-start': {
-      'align-self': 'flex-start',
+    selfStart: {
+      class: 'self-start',
+      style: {'align-self': 'flex-start'},
     },
-    'self-end': {
-      'align-self': 'flex-end',
+    selfEnd: {
+      class: 'self-end',
+      style: {'align-self': 'flex-end'},
     },
-    'self-center': {
-      'align-self': 'center',
+    selfCenter: {
+      class: 'self-center',
+      style: {'align-self': 'center'},
     },
-    'self-stretch': {
-      'align-self': 'stretch',
+    selfStretch: {
+      class: 'self-stretch',
+      style: {'align-self': 'stretch'},
     },
-    'justify-start': {
-      'justify-content': 'flex-start',
+    justifyStart: {
+      class: 'justify-start',
+      style: {'justify-content': 'flex-start'},
     },
-    'justify-end': {
-      'justify-content': 'flex-end',
+    justifyEnd: {
+      class: 'justify-end',
+      style: {'justify-content': 'flex-end'},
     },
-    'justify-center': {
-      'justify-content': 'center',
+    justifyCenter: {
+      class: 'justify-center',
+      style: {'justify-content': 'center'},
     },
-    'justify-between': {
-      'justify-content': 'space-between',
+    justifyBetween: {
+      class: 'justify-between',
+      style: {'justify-content': 'space-between'},
     },
-    'justify-around': {
-      'justify-content': 'space-around',
+    justifyAround: {
+      class: 'justify-around',
+      style: {'justify-content': 'space-around'},
     },
-    'content-center': {
-      'align-content': 'center',
+    contentCenter: {
+      class: 'content-center',
+      style: {'align-content': 'center'},
     },
-    'content-start': {
-      'align-content': 'flex-start',
+    contentStart: {
+      class: 'content-start',
+      style: {'align-content': 'flex-start'},
     },
-    'content-end': {
-      'align-content': 'flex-end',
+    contentEnd: {
+      class: 'content-end',
+      style: {'align-content': 'flex-end'},
     },
-    'content-between': {
-      'align-content': 'space-between',
+    contentBetween: {
+      class: 'content-between',
+      style: {'align-content': 'space-between'},
     },
-    'content-around': {
-      'align-content': 'space-around',
+    contentAround: {
+      class: 'content-around',
+      style: {'align-content': 'space-around'},
     },
-    'flex-1': {
-      flex: '1',
+    flex1: {
+      class: 'flex-1',
+      style: {flex: '1'},
     },
-    'flex-auto': {
-      flex: 'auto',
+    flexAuto: {
+      class: 'flex-auto',
+      style: {flex: 'auto'},
     },
-    'flex-initial': {
-      flex: 'initial',
+    flexInitial: {
+      class: 'flex-initial',
+      style: {flex: 'initial'},
     },
-    'flex-none': {
-      flex: 'none',
+    flexNone: {
+      class: 'flex-none',
+      style: {flex: 'none'},
     },
-    'flex-grow': {
-      'flex-grow': '1',
+    flexGrow: {
+      class: 'flex-grow',
+      style: {'flex-grow': '1'},
     },
-    'flex-shrink': {
-      'flex-shrink': '1',
+    flexShrink: {
+      class: 'flex-shrink',
+      style: {'flex-shrink': '1'},
     },
-    'flex-no-grow': {
-      'flex-grow': '0',
+    flexNoGrow: {
+      class: 'flex-no-grow',
+      style: {'flex-grow': '0'},
     },
-    'flex-no-shrink': {
-      'flex-shrink': '0',
+    flexNoShrink: {
+      class: 'flex-no-shrink',
+      style: {'flex-shrink': '0'},
     },
+  }
+
+  return _.map(styles, (style, className) => {
+    let modifier = _.has(modifyClassNames, `borderStyle.flexbox.${className}`) ? modifyClassNames.borderStyle.flexbox[className] : style.class;
+
+    return defineClass(`${prefix}${modifier}`, style.style)
   })
 }

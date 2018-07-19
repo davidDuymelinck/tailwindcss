@@ -1,7 +1,11 @@
 import defineClasses from '../util/defineClasses'
+import _ from "lodash";
 
-export default function() {
+export default function({ modifyClassNames }) {
+  const prefix = _.has(modifyClassNames, 'appearance.prefix') ? modifyClassNames.appearance.prefix : 'appearance-'
+  const mNone = _.has(modifyClassNames, 'appearance.modifier.none') ? modifyClassNames.appearance.modifier.none : 'none'
+
   return defineClasses({
-    'appearance-none': { appearance: 'none' },
+    [`${prefix}${mNone}`]: { appearance: 'none' },
   })
 }

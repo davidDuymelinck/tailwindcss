@@ -1,9 +1,11 @@
 import _ from 'lodash'
 import defineClass from '../util/defineClass'
 
-export default function({ svgFill }) {
+export default function({ svgFill, modifyClassNames }) {
+  const prefix = _.has(modifyClassNames, 'svgFill.prefix') ? modifyClassNames.svgFill.prefix : 'fill-'
+
   return _.map(svgFill, (color, modifier) => {
-    return defineClass(`fill-${modifier}`, {
+    return defineClass(`${prefix}${modifier}`, {
       fill: color,
     })
   })

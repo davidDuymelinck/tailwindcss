@@ -1,29 +1,39 @@
 import _ from 'lodash'
 import defineClasses from '../util/defineClasses'
 
-function defineBorderWidthUtilities(borderWidths) {
+function defineBorderWidthUtilities(borderWidths, modifyClassNames) {
+  const prefix = _.has( modifyClassNames, 'borderWidths.prefix') ? modifyClassNames.borderWidths.prefix : 'border-'
   const generators = [
-    (width, modifier) =>
-      defineClasses({
-        [`border${modifier}`]: {
+    (width, modifier) => {
+      const specificPrefix = modifier === '' ? prefix.replace('-', '') : prefix
+
+      return defineClasses({
+        [`${specificPrefix}${modifier}`]: {
           'border-width': `${width}`,
         },
-      }),
-    (width, modifier) =>
-      defineClasses({
-        [`border-t${modifier}`]: {
+      })
+    },
+    (width, modifier) => {
+      const mTop = _.has(modifyClassNames, 'borderWidths.modifier.top') ? modifyClassNames.borderWidths.modifier.top : 't'
+      const mRight = _.has(modifyClassNames, 'borderWidths.modifier.right') ? modifyClassNames.borderWidths.modifier.right : 'r'
+      const mBottom = _.has(modifyClassNames, 'borderWidths.modifier.bottom') ? modifyClassNames.borderWidths.modifier.bottom : 'b'
+      const mLeft = _.has(modifyClassNames, 'borderWidths.modifier.left') ? modifyClassNames.borderWidths.modifier.left : 'l'
+
+      return defineClasses({
+        [`${prefix}${mTop}${modifier}`]: {
           'border-top-width': `${width}`,
         },
-        [`border-r${modifier}`]: {
+        [`${prefix}${mRight}${modifier}`]: {
           'border-right-width': `${width}`,
         },
-        [`border-b${modifier}`]: {
+        [`${prefix}${mBottom}${modifier}`]: {
           'border-bottom-width': `${width}`,
         },
-        [`border-l${modifier}`]: {
+        [`${prefix}${mLeft}${modifier}`]: {
           'border-left-width': `${width}`,
         },
-      }),
+      })
+    },
   ]
 
   return _.flatMap(generators, generator => {
@@ -33,6 +43,6 @@ function defineBorderWidthUtilities(borderWidths) {
   })
 }
 
-module.exports = function({ borderWidths }) {
-  return defineBorderWidthUtilities(borderWidths)
+module.exports = function({ borderWidths, modifyClassNames }) {
+  return defineBorderWidthUtilities(borderWidths, modifyClassNames)
 }

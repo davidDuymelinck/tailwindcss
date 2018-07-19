@@ -1,18 +1,15 @@
-import defineClasses from '../util/defineClasses'
+import defineClass from "../util/defineClass";
+import _ from "lodash";
 
-export default function() {
-  return defineClasses({
-    'border-solid': {
-      'border-style': 'solid',
-    },
-    'border-dashed': {
-      'border-style': 'dashed',
-    },
-    'border-dotted': {
-      'border-style': 'dotted',
-    },
-    'border-none': {
-      'border-style': 'none',
-    },
+export default function({ modifyClassNames }) {
+  const prefix = _.has(modifyClassNames, 'borderStyle.prefix') ? modifyClassNames.borderStyle.prefix : 'border-'
+  const values = ['solid', 'dashed', 'dotted', 'none']
+
+  return _.map(values, (value) => {
+    let modifier = _.has(modifyClassNames, `borderStyle.modifier.${value}`) ? modifyClassNames.borderStyle.modifier[value] : value;
+
+    return defineClass(`${prefix}${modifier}`, {
+      'border-style': value,
+    })
   })
 }
